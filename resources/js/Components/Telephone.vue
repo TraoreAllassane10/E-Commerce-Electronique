@@ -13,7 +13,7 @@
                     <button>Ajouter au panier</button>
                 </div>
             </div>
-
+            <!-- <ProduitCard :produits="five_phones" /> -->
         </div>
     </section>
 </template>
@@ -21,6 +21,7 @@
 <script setup>
 import useProduct from '@/Services/Produit';
 import { defineProps, onMounted, ref } from 'vue';
+import ProduitCard from './ProduitCard.vue';
 
 const {fivePhone,five_phones,FormatagePrix} = useProduct()
 

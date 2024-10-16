@@ -20,6 +20,7 @@ onMounted(() => {
 .container {
     position: absolute;
     right: 10px;
+    bottom: 0;
     background-color: rgb(27, 252, 121);
     box-shadow: 0px 4px 8px #E0E0E0;
     display: flex;

@@ -1,6 +1,6 @@
 <template>
-    <div class="card_container">
 
+    <div class="card_container">
         <div class="card" v-for="produit in props.produits" :key="produit.id">
             <div class="card-img">
                 <img :src="`/storage/${produit.image}`" alt="" srcset="">
@@ -8,17 +8,39 @@
             <div class="card-text">
                 <h4>{{ produit.libelle }}</h4>
                 <p>{{ FormatagePrix(produit.prix) }}</p>
-                <button>Ajouter au panier</button>
+                <button @click="add(produit.id, produit.libelle, produit.prix, produit.image)">Ajouter au panier</button>
             </div>
         </div>
+    </div>
+
+    <div v-if="visibleAlert">
+        <AlertPanier message="Produit ajouté dans le panier"/>
     </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
 import useProduct from '@/Services/Produit';
-const {FormatagePrix} =useProduct()
+import useCart from '@/Services/Panier';
+import AlertPanier from '@/Shared/AlertPanier.vue';
+
+const { FormatagePrix } = useProduct()
 const props = defineProps(['produits'])
+
+const visibleAlert = ref(false)
+
+//Inplementation du panier
+const { addToCart } = useCart()
+const add = (id, libelle, prix, image) => {
+    visibleAlert.value =true
+    addToCart(id, libelle, prix, image, localStorage.getItem('user_token'))
+    setTimeout(() => {
+        visibleAlert.value = false
+    },1000)
+}
+
+
+
 </script>
 
 <style scoped>

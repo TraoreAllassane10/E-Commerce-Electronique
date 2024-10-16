@@ -11,7 +11,7 @@
                         libero. Integer rhoncus felis a sapien rhoncus, a lobortis nisi euismod
                     </p>
                     <button class="blue-button">
-                        Decouvrir
+                        <Link href="/produits">Decouvrir</Link>
                     </button>
                 </div>
                 <div id="product-top-image-section">
@@ -24,6 +24,7 @@
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/vue3';
 
 </script>
 

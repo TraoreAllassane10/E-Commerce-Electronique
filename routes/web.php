@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Panier\ShoppingCartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,9 @@ Route::get('/login', function () {
     return Inertia::render('Auth/Connexion');
 });
 
+
+
+
 //Toutes les routes des pages de produits
 Route::get('/produits', function () {
     return Inertia::render('Produit/TousLesProduits');
@@ -52,6 +56,12 @@ Route::get('/Tablette', function () {
 
 Route::get('/Montre', function () {
     return Inertia::render('Produit/Montre');
+});
+
+
+//La route de la page de panier
+Route::get('/panier',function() {
+    return Inertia::render('Panier');
 });
 
 

@@ -8,7 +8,7 @@
             <li>
                 <Link href="/">Acceuil</Link>
             </li>
-            <li><a href="" class="link_produit">Nos Produits</a>
+            <li><a class="link_produit" @click="() => visible = ! visible">Nos Produits</a>
 
             </li>
             <li><a href="">Qui sommes-nous ?</a></li>
@@ -16,7 +16,7 @@
         </ul>
 
         <div class="btns">
-            <button>Panier</button>
+            <Link href="/panier">Panier</Link>
             <Link href="/login" class="btn_blue" v-if="!logged">Connexion</Link>
             <Link href="/"><img src="../../../public/assets/profile.png" alt="" v-if="logged && !admin" class="profile">
             </Link>
@@ -24,23 +24,27 @@
         </div>
     </nav>
 
-    <!-- <ul class="menu_deroulant">
-        <li><a href="">Tous les produits</a></li>
-        <li><a href="">Telephone</a></li>
-        <li><a href="">Casque BT</a></li>
-        <li><a href="">Tablette</a></li>
-        <li><a href="">Montre</a></li>
-        <li><a href="">Ordinateur</a></li>
-    </ul> -->
+    <ul class="menu_deroulant" v-show="visible">
+        <li><Link href="/produits">Tous les produits</Link></li>
+        <li><Link href="/Telephone">Telephone</Link></li>
+        <li><Link href="/Casque BT">Casque BT</Link></li>
+        <li><Link href="/Tablette">Tablette</Link></li>
+        <li><Link href="/Montre">Montre</Link></li>
+        <li><Link href="/Laptop">Ordinateur</Link></li>
+    </ul>
 
 </template>
 
 <script setup>
 import { Link } from "@inertiajs/vue3";
-import { inject, onMounted } from "vue";
+import { inject, onMounted, ref } from "vue";
 const { logged, changeLogged } = inject('logged')
 
+// Cette variable permet de savoir si l'user connectée est un admin pour pouvoir afficher le dashboard
 let admin = localStorage.getItem('user_admin') == 1 ? true : false
+
+// Menu deroulant
+let visible = ref(false)
 
 changeLogged()
 </script>
@@ -56,7 +60,7 @@ nav {
     position: fixed;
     background-color: #fff;
     z-index: 1000;
-
+    box-shadow: 0px 1px 8px #e0e0e0;
 }
 
 .logo {
@@ -75,6 +79,7 @@ nav ul a {
     color: rgb(64, 64, 64);
     font-weight: 500;
     transition: all 0.3s ease-in-out;
+    cursor: pointer;
 }
 
 nav ul a:hover{

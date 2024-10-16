@@ -17,7 +17,7 @@ import useProduct from '@/Services/Produit';
 import Loader from '@/Shared/Loader.vue';
 import { onMounted } from 'vue';
 
-const { getProducts, produits, FormatagePrix, loading } = useProduct()
+const { getProducts, produits, loading } = useProduct()
 
 onMounted(() => {
     getProducts()
