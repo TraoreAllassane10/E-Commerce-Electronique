@@ -18,7 +18,7 @@ onMounted(() => {
 
 <style scoped>
 .container {
-    position: absolute;
+    position: fixed;
     right: 10px;
     bottom: 0;
     background-color: rgb(27, 252, 121);

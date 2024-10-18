@@ -64,6 +64,10 @@ Route::get('/panier',function() {
     return Inertia::render('Panier');
 });
 
+Route::get('/confirmation', function(){
+    return Inertia::render('Confirmation');
+})->name('confirmation');
+
 
 //Toutes les routes de l'administrateur
 

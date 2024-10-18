@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CommandeController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Panier\ShoppingCartController;
@@ -50,4 +51,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/panier/delete/{id}', [ShoppingCartController::class, 'deleteCart'])->name('');
         Route::get('/panier/vider', [ShoppingCartController::class, 'vider'])->name('');
     });
+
+    Route::post('/commande/add',[CommandeController::class, 'store']);
 });

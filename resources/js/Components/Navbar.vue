@@ -89,7 +89,7 @@ nav ul a:hover{
 .menu_deroulant {
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     left: 480px;
     top: 50px;
     z-index: 1000;

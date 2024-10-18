@@ -16,7 +16,7 @@
 
         <div class="btns">
             <button @click="destroyCart()" class="btn-destroy">Vider</button>
-            <button class="btn-commander">Commander</button>
+            <Link class="btn-commander" href="/confirmation">Commander</Link>
         </div>
     </div>
 </template>
@@ -25,6 +25,8 @@
 import Navbar from "@/Components/Navbar.vue"
 import useCart from "@/Services/Panier";
 import useProduct from "@/Services/Produit";
+import { Link } from "@inertiajs/vue3";
+
 import { onMounted } from "vue";
 
 const { getCart, removeToCart, produits, total, destroyCart } = useCart()
@@ -76,6 +78,11 @@ table button {
     color: #FFF;
     padding: 5px;
     border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+table button:hover {
+    background-color: rgba(236, 92, 92, 0.8);
 }
 
 .container p {
@@ -98,12 +105,53 @@ table button {
     color: #FFF;
     padding: 10px;
     border-radius: 5px;
+    transition: all 0.3s ease-in-out;
 }
 
-.btn-commander{
+.btn-destroy:hover {
+    background-color: rgba(236, 92, 92, 0.8);
+}
+
+.btn-commander {
     background-color: #3b73dc;
     color: #FFF;
     padding: 10px;
     border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-commander:hover {
+    background-color: #3b73dc;
+    opacity: 0.8;
+}
+
+/*Le style du modal */
+.modal{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1d1d1d;
+    opacity: 0.4;
+    z-index: 1000;
+}
+
+.modal-wrapper
+{
+    padding: 50px;
+    background-color: #FFF;
+    color: rgb(64, 64, 64);
+    box-shadow: 0px 4px 4px 8px #e0e0e0;
+}
+
+form
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 </style>
