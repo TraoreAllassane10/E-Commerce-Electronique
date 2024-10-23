@@ -10,19 +10,37 @@
                 <div class="card-text">
                     <h4>{{ produit.libelle }}</h4>
                     <p>{{ FormatagePrix(produit.prix) }}</p>
-                    <button>Ajouter au panier</button>
+                    <button @click="add(produit.id, produit.libelle, produit.prix, produit.image)">Ajouter au
+                        panier</button>
                 </div>
             </div>
 
+        </div>
+
+        <div v-if="visibleAlert">
+            <AlertPanier message="Produit ajouté dans le panier" />
         </div>
     </section>
 </template>
 
 <script setup>
+import useCart from '@/Services/Panier';
 import useProduct from '@/Services/Produit';
+import AlertPanier from '@/Shared/AlertPanier.vue';
 import { defineProps, onMounted, ref } from 'vue';
 
+const { addToCart } = useCart()
 const { fiveCasque, five_casques, FormatagePrix } = useProduct()
+
+let visibleAlert = ref(false)
+const add = (id, libelle, prix, image) => {
+    visibleAlert.value = true
+    addToCart(id, libelle, prix, image, localStorage.getItem('user_token'))
+    setTimeout(() => {
+        visibleAlert.value = false
+    }, 1000)
+}
+
 
 onMounted(() => {
     fiveCasque()

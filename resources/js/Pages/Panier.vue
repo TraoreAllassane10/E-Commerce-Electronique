@@ -16,7 +16,7 @@
 
         <div class="btns">
             <button @click="destroyCart()" class="btn-destroy">Vider</button>
-            <Link class="btn-commander" href="/confirmation">Commander</Link>
+            <Link class="btn-commander" href="/confirmation" >Commander</Link>
         </div>
     </div>
 </template>
@@ -26,13 +26,14 @@ import Navbar from "@/Components/Navbar.vue"
 import useCart from "@/Services/Panier";
 import useProduct from "@/Services/Produit";
 import { Link } from "@inertiajs/vue3";
-
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 
 const { getCart, removeToCart, produits, total, destroyCart } = useCart()
 const { FormatagePrix } = useProduct()
+
 onMounted(() => {
     getCart(localStorage.getItem('user_token'))
+
 })
 </script>
 

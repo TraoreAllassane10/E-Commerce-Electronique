@@ -8,9 +8,7 @@ import Casque from "@/Components/Casque.vue";
 import Ipad from "@/Components/Ipad.vue";
 import Promotion from "@/Components/Promotion.vue";
 import { inject, onMounted } from "vue";
-import useProduct from "@/Services/Produit";
-import useCommande from "@/Services/Commande";
-import Alert from "@/Shared/Alert.vue";
+
 
 
 const {logged,user,changeLogged} = inject('logged')
@@ -30,10 +28,6 @@ onMounted(() => {
     <Promotion/>
     <Ipad/>
     <Footer/>
-
-    <div v-if="commande_success">
-        <Alert message="Commande validée" />
-    </div>
 </template>
 
 <style scoped>

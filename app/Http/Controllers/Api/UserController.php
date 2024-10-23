@@ -65,7 +65,7 @@ class UserController extends Controller
         Auth::logout();
 
         return response()->json([
-            'code_status' => 200,
+            'status_code' => 200,
             'message' => "Utilisateur deconnecté",
         ]);
     }

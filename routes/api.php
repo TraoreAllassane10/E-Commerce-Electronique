@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\CommandeController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserController;
@@ -35,6 +36,8 @@ Route::get('/logout', [UserController::class, 'logout'])->name("user.logout");
 
 Route::middleware('auth:sanctum')->group(function () {
 
+    Route::delete('/logout', [UserController::class, 'logout'])->name("user.logout");
+
     Route::post('/categorie/create', [CategoryController::class, 'store'])->name("category.store");
     Route::put('/categorie/edit/{category}', [CategoryController::class, 'update'])->name("category.update");
 
@@ -52,5 +55,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/panier/vider', [ShoppingCartController::class, 'vider'])->name('');
     });
 
+    //Les routes de la commande
+    Route::get('/commandes',[CommandeController::class, 'index']);
     Route::post('/commande/add',[CommandeController::class, 'store']);
+
+    //La route de recuperation des clients
+    Route::get('/clients', [ClientController::class, 'index']);
 });

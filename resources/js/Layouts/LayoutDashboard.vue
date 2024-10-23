@@ -15,8 +15,6 @@
             <Link href="/clients">Clients</Link>
             <Link href="/admin/produits">Produits</Link>
             <Link href="/commandes">Commandes</Link>
-            <Link href="/utilisateurs">Utilisateurs</Link>
-            <Link href="/parametres">Parametres</Link>
         </div>
     </nav>
 

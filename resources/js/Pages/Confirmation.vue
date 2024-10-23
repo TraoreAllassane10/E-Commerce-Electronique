@@ -30,6 +30,7 @@ import { defineProps, onMounted, reactive, ref } from 'vue';
 import Navbar from '@/Components/Navbar.vue';
 import useCart from '@/Services/Panier';
 import useCommande from "@/Services/Commande"
+import { router } from '@inertiajs/vue3';
 
 const {total,getCart} = useCart()
 const {addCommande} = useCommande()

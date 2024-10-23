@@ -10,20 +10,37 @@
                 <div class="card-text">
                     <h4>{{ produit.libelle }}</h4>
                     <p>{{ FormatagePrix(produit.prix) }}</p>
-                    <button>Ajouter au panier</button>
+                    <button @click="add(produit.id, produit.libelle, produit.prix, produit.image)">Ajouter au
+                        panier</button>
                 </div>
             </div>
             <!-- <ProduitCard :produits="five_phones" /> -->
+        </div>
+
+        <div v-if="visibleAlert">
+            <AlertPanier message="Produit ajouté dans le panier" />
         </div>
     </section>
 </template>
 
 <script setup>
+import useCart from '@/Services/Panier';
 import useProduct from '@/Services/Produit';
 import { defineProps, onMounted, ref } from 'vue';
 import ProduitCard from './ProduitCard.vue';
+import AlertPanier from '@/Shared/AlertPanier.vue';
 
-const {fivePhone,five_phones,FormatagePrix} = useProduct()
+const { addToCart } = useCart()
+const { fivePhone, five_phones, FormatagePrix } = useProduct()
+
+let visibleAlert = ref(false)
+const add = (id, libelle, prix, image) => {
+    visibleAlert.value = true
+    addToCart(id, libelle, prix, image, localStorage.getItem('user_token'))
+    setTimeout(() => {
+        visibleAlert.value = false
+    }, 1000)
+}
 
 onMounted(() => {
     fivePhone()
@@ -77,16 +94,16 @@ h3 {
     padding: 20px 0 0 20px;
 }
 
-.card-text h4{
+.card-text h4 {
     color: rgb(64, 64, 64);
     font-weight: 500;
 }
 
-.card-text p{
+.card-text p {
     color: rgb(64, 64, 64);
 }
 
-.card-text button{
+.card-text button {
     background-color: #3b73dc;
     color: #fff;
     font-size: 16px;

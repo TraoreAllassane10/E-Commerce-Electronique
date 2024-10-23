@@ -8,7 +8,7 @@
             <li>
                 <Link href="/">Acceuil</Link>
             </li>
-            <li><a class="link_produit" @click="() => visible = ! visible">Nos Produits</a>
+            <li><a class="link_produit" @click="() => visible = !visible">Nos Produits</a>
 
             </li>
             <li><a href="">Qui sommes-nous ?</a></li>
@@ -18,25 +18,39 @@
         <div class="btns">
             <Link href="/panier">Panier</Link>
             <Link href="/login" class="btn_blue" v-if="!logged">Connexion</Link>
-            <Link href="/"><img src="../../../public/assets/profile.png" alt="" v-if="logged && !admin" class="profile">
-            </Link>
+            <!-- <Link href="/"><img src="../../../public/assets/profile.png" alt="" v-if="logged && !admin" class="profile">
+            </Link> -->
             <Link href="/dashboard" class="btn_blue" v-if="admin">Dashboard</Link>
+            <Link @click="deconnexion" class="btn_logout" v-if="logged">Deconnecter</Link>
         </div>
     </nav>
 
     <ul class="menu_deroulant" v-show="visible">
-        <li><Link href="/produits">Tous les produits</Link></li>
-        <li><Link href="/Telephone">Telephone</Link></li>
-        <li><Link href="/Casque BT">Casque BT</Link></li>
-        <li><Link href="/Tablette">Tablette</Link></li>
-        <li><Link href="/Montre">Montre</Link></li>
-        <li><Link href="/Laptop">Ordinateur</Link></li>
+        <li>
+            <Link href="/produits">Tous les produits</Link>
+        </li>
+        <li>
+            <Link href="/Telephone">Telephone</Link>
+        </li>
+        <li>
+            <Link href="/Casque BT">Casque BT</Link>
+        </li>
+        <li>
+            <Link href="/Tablette">Tablette</Link>
+        </li>
+        <li>
+            <Link href="/Montre">Montre</Link>
+        </li>
+        <li>
+            <Link href="/Laptop">Ordinateur</Link>
+        </li>
     </ul>
 
 </template>
 
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
+import axios from "axios";
 import { inject, onMounted, ref } from "vue";
 const { logged, changeLogged } = inject('logged')
 
@@ -45,8 +59,25 @@ let admin = localStorage.getItem('user_admin') == 1 ? true : false
 
 // Menu deroulant
 let visible = ref(false)
-
 changeLogged()
+
+//deconnexion de l'utilisateur
+const deconnexion = async () => {
+    // await axios.delete('/api/logout', {
+    //     headers: {
+    //         "Authorization": `Bearer ${localStorage.getItem("user_token")}`
+    //     }
+    // }).then((res) => {
+    //     if (res.data.status_code == 200) {
+    //         router.visit("/login")
+    //     }
+    // })
+
+    localStorage.removeItem("user_token")
+    localStorage.removeItem("user_admin")
+
+    router.visit("/login")
+}
 </script>
 
 <style scoped>
@@ -82,7 +113,7 @@ nav ul a {
     cursor: pointer;
 }
 
-nav ul a:hover{
+nav ul a:hover {
     color: #3b73dc;
 }
 
@@ -120,5 +151,14 @@ nav ul a:hover{
 .profile {
     width: 40px;
     height: 40px;
+}
+
+.btn_logout {
+    background-color: rgb(252, 87, 87);
+    padding: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
 }
 </style>
